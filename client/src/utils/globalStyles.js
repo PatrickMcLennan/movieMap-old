@@ -1,6 +1,7 @@
 import { css, createGlobalStyle } from 'styled-components';
 
 export const theme = {
+    // Layout
     flexin: (jc = 'center', ai = 'center', fd = 'row', fw = 'wrap') =>
         css`
             display: flex;
@@ -8,7 +9,8 @@ export const theme = {
             align-items: ${ai};
             flex-direction: ${fd};
             flex-wrap: ${fw};
-        `
+        `,
+    fullPage: css`min-height: 100vh; min-width: 100vw;`
 }
 
 export const GlobalStyle = createGlobalStyle`

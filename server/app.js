@@ -7,6 +7,8 @@ const json = require('body-parser');
 
 const PORT = process.env.PORT || 4000;
 
+const postMovieDump = require('./controllers/postMovieDump');
+
 const app = new express();
 
 dotenv.config();
