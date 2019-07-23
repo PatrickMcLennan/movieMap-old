@@ -6,9 +6,11 @@ import LoginModal from '../../components/LoginModal/LoginModal.jsx'
 class Login extends Component {
     render() {
         return (
+            <LoginProvider>
                 <StyledBackdrop>
                     <LoginModal />
                 </StyledBackdrop>
+            </LoginProvider>
         )
     }
 }
