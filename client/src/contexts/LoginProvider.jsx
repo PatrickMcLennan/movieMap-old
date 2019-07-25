@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Redirect } from 'react-router-dom';
+
 export const LoginContext = React.createContext();
 
 class LoginProvider extends Component {
@@ -14,6 +16,13 @@ class LoginProvider extends Component {
         if (ie && !localStorage.getItem('seen')) {
             return this.setState({ ieDetected: true })
         }
+    }
+
+    handleChange = ({ target: { name, value } }) => this.setState(prevState => ({ ...prevState, [name]: value }))
+    
+    handleSubmit = e => {
+        e.preventDefault();
+        console.log(this.state);
     }
 
     saveWarning = () => {
@@ -47,8 +56,9 @@ class LoginProvider extends Component {
     }
 
     render() {
+        const { state, handleChange, handleSubmit } = this;
         return (
-            <LoginContext.Provider value={{ ...this.state }} >
+            <LoginContext.Provider value={{ ...state, handleChange, handleSubmit }} >
                 {this.props.children}
             </LoginContext.Provider>
         )

@@ -1,20 +1,16 @@
-import React, {useState} from 'react';
-import {LoginContext} from '../../contexts/LoginProvider.jsx';
+import React, { useContext } from 'react';
+import { LoginContext } from '../../contexts/LoginProvider.jsx';
 
-const signup = () => alert(`${inputs.email} ${inputs.password}`)
+import { StyledForm, StyledInput } from './LoginModal.style'
 
 const LoginModal = () => {
-    const [inputs, setInputs] = useState({});
+    const { email, password, handleChange, handleSubmit } = useContext(LoginContext)
     return (
-        <LoginContext.Consumer>
-            {context => 
-                <form onSubmit={e => { e.preventDefault(); console.log(inputs) }}>
-                    <input type="email" name="email" onChange={e => setInputs(e.target.value)} value={inputs.email} required/>
-                    <input type="password" name="password" onChange={e => setInputs(e.target.value)} value={inputs.password} required />
-                    <input type="submit" value="submit" />
-                </form>
-            }
-        </LoginContext.Consumer>
+            <StyledForm onSubmit={e => handleSubmit(e)}>
+                <StyledInput type="email" name="email" onChange={e => handleChange(e)} value={email} required/>
+                <StyledInput type="password" name="password" onChange={e => handleChange(e)} value={password} required />
+                <input type="submit" value="submit" />
+            </StyledForm>
     )
 } 
 
