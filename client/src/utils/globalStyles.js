@@ -1,8 +1,9 @@
-import { css, createGlobalStyle } from 'styled-components';
+import { css, createGlobalStyle, keyframes } from 'styled-components';
 
 export const theme = {
     // 'state'
-    night: new Date().getHours() >= 20 || new Date().getHours() <= 7,
+    preference: false,
+    night: new Date().getHours() >= 20 || new Date().getHours() <= 7 || theme.preference,
     
     directions: ['to bottom right', 'to top left', 'to bottom left', 'to top right'],
     delays: ['0', '.05', '.075', '.1', '1.25', '1.5'],
@@ -19,6 +20,7 @@ export const theme = {
         dullTeal: '#37DBD0',
         brightTeal: '#5EFAF7',
     },
+
     // Layout
     flexin: (jc = 'center', ai = 'center', fd = 'row', fw = 'wrap') =>
         css`
@@ -28,7 +30,29 @@ export const theme = {
             flex-direction: ${fd};
             flex-wrap: ${fw};
         `,
-    fullPage: css`min-height: 100vh; min-width: 100vw;`
+    fullPage: css`min-height: 100vh; min-width: 100vw;`,
+    schemeBg: () =>
+        css`
+            background-image:
+                linear-gradient(to right, 
+                    ${theme.night ? 'black' : 'white'} 50%, 
+                    ${theme.night ? 'white' : 'black'} 50%);
+            background-position: 0% 0%;
+            background-size: 200%;
+
+            ${!theme.night && css`animation: ${theme.slideBg} .3s ease-in-out 0 ;`}
+        `,
+
+    // Animations
+    slideBg: keyframes`
+        0% {
+            background-position: 0% 0%;
+        }
+
+        100% {
+            background-position: 100% 0%;
+        }
+    `,
 }
 
 export const GlobalStyle = createGlobalStyle`
