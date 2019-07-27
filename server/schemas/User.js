@@ -20,17 +20,25 @@ const UserSchema = new Schema({
 		type: String,
 		required: 'Each user must have a password'
 	},
-	savedMovies: [Movie]
+	savedMovies: [Movie],
+	colorScheme: String,
+	notifications: [
+		{
+			notification: {
+				type: String,
+				required: 'Each notification must have a type'
+			},
+			body: {
+				type: String,
+				required: 'Each notification must have a body'
+			},
+			name: {
+				type: String
+			}
+		}
+	]
 });
 
 UserSchema.plugin(uniqueValidator);
-
-UserSchema.methods.validPassword = function(password) {
-	return bcrypt.compareSync(password, this.password);
-};
-
-UserSchema.virtual('password').set(function(value) {
-	this.password = bcrypt.hashSync(value, 12);
-});
 
 module.exports = Model('User', UserSchema);

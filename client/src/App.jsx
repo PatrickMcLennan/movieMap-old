@@ -13,24 +13,11 @@ class App extends Component {
         renderLogin: false,
     }
 
-    login = ({ email, password }) => 
-        axios({
-            method: 'GET',
-            url: 'https://localhost:4000/getLogin',
-            headers: { 'Content-Type': 'application/json' },
-            body: { email, password }
-        })
-            .then(success => {
-                console.log(success)
-            })
-            .catch(err => console.error(err))
-
 
     componentWillMount() {
         const user = JSON.parse(localStorage.getItem('movieMap'));
-
+        console.log(this.props.context)
         if (user) {
-            this.login(user);
             return this.setState({ renderLogin: false })
         }
     }

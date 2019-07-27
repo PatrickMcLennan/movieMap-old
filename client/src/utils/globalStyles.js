@@ -1,10 +1,17 @@
 import { css, createGlobalStyle, keyframes } from 'styled-components';
 
+export const dayTheme = {
+    main: 'white',
+    secondary: 'black',
+}
+export const nightTheme = {
+    main: 'black',
+    secondary: 'white',
+}
+
+const colorScheme = new Date().getHours() >= 20 || new Date().getHours() <= 7 ? nightTheme : dayTheme;
+
 export const theme = {
-    // 'state'
-    preference: false,
-    night: new Date().getHours() >= 20 || new Date().getHours() <= 7 || theme.preference,
-    
     directions: ['to bottom right', 'to top left', 'to bottom left', 'to top right'],
     delays: ['0', '.05', '.075', '.1', '1.25', '1.5'],
     durations: ['.15', '.2', '.25'],
@@ -35,10 +42,10 @@ export const theme = {
         css`
             background-image:
                 linear-gradient(to right, 
-                    ${theme.night ? 'black' : 'white'} 50%, 
-                    ${theme.night ? 'white' : 'black'} 50%);
+                    ${colorScheme.main} 50%, 
+                    ${colorScheme.secondary} 50%);
             background-position: 0% 0%;
-            background-size: 200%;
+            background-size: 200% 200%;
 
             ${!theme.night && css`animation: ${theme.slideBg} .3s ease-in-out 0 ;`}
         `,

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import { Redirect } from 'react-router-dom';
-
 export const LoginContext = React.createContext();
 
 class LoginProvider extends Component {
@@ -33,7 +31,7 @@ class LoginProvider extends Component {
     ignoreWarning = () => this.setState({ ieDetected: false })
 
 
-    login = () => {
+    login = () => 
         axios({
             method: 'GET',
             url: 'https://localhost:4000/getLogin',
@@ -42,18 +40,18 @@ class LoginProvider extends Component {
         })
             .then(success => console.log(success))
             .catch(err => console.error(err))
-    }
 
-    createUser = () => {
+
+    createUser = ({ email, user, password }) => 
         axios({
             method: 'POST',
             url: 'https://localhost:4000/createUser',
             headers: { 'Content-Type': 'application/json' },
-            body: { email: this.state.email, password: this.state.password }
+            body: { email, user, password }
         })
             .then(success => console.log(success))
-            .catch(err => console.error(err))
-    }
+            .catch(error => console.error(error))
+
     
     render() {
         const { state, handleChange, handleSubmit } = this;
