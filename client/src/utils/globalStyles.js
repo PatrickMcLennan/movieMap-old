@@ -1,6 +1,24 @@
 import { css, createGlobalStyle } from 'styled-components';
 
 export const theme = {
+    // 'state'
+    night: new Date().getHours() >= 20 || new Date().getHours() <= 7,
+    
+    directions: ['to bottom right', 'to top left', 'to bottom left', 'to top right'],
+    delays: ['0', '.05', '.075', '.1', '1.25', '1.5'],
+    durations: ['.15', '.2', '.25'],
+
+    // Colors
+    colors: {
+        dullBrown: '#F9B32F',
+        brightBrown: '#FFCF4B',
+
+        dullGreen: '#3EDC81',
+        brightGreen: '#5EFCA1',
+
+        dullTeal: '#37DBD0',
+        brightTeal: '#5EFAF7',
+    },
     // Layout
     flexin: (jc = 'center', ai = 'center', fd = 'row', fw = 'wrap') =>
         css`
@@ -31,5 +49,6 @@ export const GlobalStyle = createGlobalStyle`
         min-height: 100vh;
         min-width: 100vw;
     }
-
 `
+
+// color site = http://www.flatcolorsui.com/

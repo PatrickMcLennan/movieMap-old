@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Model = mongoose.Model;
+const Model = mongoose.model;
 const User = require('./User');
 const Comment = require('./Comment');
 
@@ -16,7 +16,7 @@ const MovieSchema = new Schema({
 	ratings: [
 		{
 			user: {
-				type: User.name,
+				type: String,
 				required: 'Each rating must have a user attached to it.'
 			},
 			rating: {
@@ -30,7 +30,7 @@ const MovieSchema = new Schema({
 	quality: [
 		{
 			user: {
-				type: User.name,
+				type: String,
 				required: 'Each Quality rating must have a user attached to it.'
 			},
 			quality: {
@@ -44,7 +44,7 @@ const MovieSchema = new Schema({
 	reports: [
 		{
 			user: {
-				type: User.name,
+				type: String,
 				required: 'Each Report must have a user name attached to it.'
 			},
 			comment: String
@@ -54,7 +54,12 @@ const MovieSchema = new Schema({
 		type: String,
 		required: 'Each movie must have a specified origin'
 	},
-	comments: [Comment]
+	comments: [
+		{
+			name: { type: String, required: 'Each comment must have a user name' },
+			body: { type: String, required: 'Each comment must have a body' }
+		}
+	]
 });
 
 module.exports = Model('Movie', MovieSchema);

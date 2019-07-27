@@ -5,24 +5,28 @@ const reddit = {
 	browser: null,
 	page: null,
 
-	saveMovies: async movies => {
+	saveMovies: async movies =>
 		axios({
 			method: 'POST',
+			url: 'https://localhost:4000/postMovieDump',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: movies
+			movies
 		})
-			.then(resp => console.log(resp))
-			.catch(err => console.error(err));
-	},
+			.then(res => console.log('it worked'))
+			.catch(err => console.error('it did not work')),
 
 	parse: async rawPage => {
+		console.log('Subreddit reached, beginning to parse now...');
 		const allMovies = await rawPage.evaluate(() => {
-			const posts = Array.from(document.querySelectorAll('div[class="thing"]'));
+			const posts = Array.from(document.querySelectorAll('.thing'));
 			return posts.map(post => {
 				return {
-					title: post.querySelector('a[data-event-action="title"]').split(/([1-9])/)[0],
+					title: post
+						.querySelector('a[data-event-action="title"]')
+						.textContent.split('(')[0]
+						.trim(),
 					href: post.querySelector('a[data-event-action="title"]').getAttribute('href'),
 					ads: [
 						post.querySelector('.stickied-tagline') ? true : null,
@@ -39,9 +43,13 @@ const reddit = {
 	},
 
 	initialize: async () => {
+		console.log('Beginning Reddit Scraper.');
 		reddit.browser = await puppeteer.launch();
 		reddit.page = await reddit.browser.newPage();
-		await reddit.page.goto(`https://old.reddit.com/r/fullmoviesonyoutube`);
+		await reddit.page.goto(`https://old.reddit.com/r/fullmoviesonyoutube`, {
+			waitUntil: 'networkidle0',
+			timeout: 0
+		});
 		return reddit.parse(reddit.page);
 	}
 };

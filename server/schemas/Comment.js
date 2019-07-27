@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Model = mongoose.Model;
+const Model = mongoose.model;
 
 const CommentSchema = new Schema({
 	user: {
-		name: String,
+		type: String,
 		required: 'Each comment must have a user name'
 	},
 	date: {
-		date: Date,
+		type: Date,
 		required: 'Each comment must have a time stamp'
 	},
 	body: {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyledBackdrop } from './Login.style';
+import { StyledBackdrop, StyledH1 } from './Login.style';
 import LoginProvider from '../../contexts/LoginProvider.jsx'
 import LoginModal from '../../components/LoginModal/LoginModal.jsx'
 
@@ -11,6 +11,7 @@ class Login extends Component {
         return (
             <LoginProvider>
                 <StyledBackdrop>
+                    <StyledH1>movieMap</StyledH1>
                     <LoginModal />
                 </StyledBackdrop>
             </LoginProvider>

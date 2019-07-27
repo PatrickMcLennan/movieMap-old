@@ -49,12 +49,12 @@ class LoginProvider extends Component {
             method: 'POST',
             url: 'https://localhost:4000/createUser',
             headers: { 'Content-Type': 'application/json' },
-            body: [this.state.email, this.state.password]
+            body: { email: this.state.email, password: this.state.password }
         })
             .then(success => console.log(success))
             .catch(err => console.error(err))
     }
-
+    
     render() {
         const { state, handleChange, handleSubmit } = this;
         return (
