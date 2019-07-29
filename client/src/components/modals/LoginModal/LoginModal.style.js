@@ -36,13 +36,3 @@ export const BiggestButton = styled.button`
     border: 1px solid red;  
     cursor: pointer;
 `
-
-export const ButtonInput = styled.input`
-    background-color: none;
-    padding: 2rem;
-    font-size: 2rem;
-    text-transform: uppercase;
-    letter-spacing: .25rem;
-    border: 1px solid red;  
-    cursor: pointer;
-`

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, createContext } from 'react';
+import axios from 'axios';
 
-
-export const UserContext = React.createContext();
+export const UserContext = createContext();
 
 class UserProvider extends Component {
     state = {
@@ -50,15 +50,16 @@ class UserProvider extends Component {
             method: 'PUT',
             url: 'https://localhost:4000/editUser',
             headers: { 'Content-Type': 'application/json' },
-            body: { colorScheme: newScheme }
+            data: { colorScheme: newScheme }
         })
             .then(success => this.renderResponse(success))
             .catch(error => this.renderResponse(error))
 
     render() {
         const { state, changeScheme, login, renderResponse } = this;
+        console.log(this.state);
         return (
-            <UserContext.Provider value={{ state, changeScheme, login, renderResponse }}>
+            <UserContext.Provider value={{ ...state, changeScheme, login, renderResponse }} >
                 {this.props.children}
             </UserContext.Provider>
         )

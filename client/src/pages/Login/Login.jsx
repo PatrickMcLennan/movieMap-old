@@ -1,22 +1,21 @@
-import React, { Component } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { StyledBackdrop, StyledH1 } from './Login.style';
-import LoginProvider from '../../contexts/LoginProvider.jsx'
-import LoginModal from '../../components/LoginModal/LoginModal.jsx'
+import LoginModal from '../../components/modals/LoginModal/LoginModal.jsx'
+import RegisterModal from '../../components/modals/RegisterModal/RegisterModal.jsx'
+import { LoginContext } from '../../contexts/LoginProvider';
 
-class Login extends Component {
-    componentDidMount() {
+const Login = () => {
+    const { state: { state: {LoginModal, RegisterModal, animationTiming }} } = useContext(LoginContext)
+    useEffect(() => {
         document.title = 'movieMap | Log In'
-    }
-    render() {
-        return (
-            <LoginProvider>
-                <StyledBackdrop>
-                    <StyledH1>movieMap</StyledH1>
-                    <LoginModal />
-                </StyledBackdrop>
-            </LoginProvider>
-        )
-    }
+    })
+    return (
+        <StyledBackdrop>
+            <StyledH1>movieMap</StyledH1>
+            <LoginModal render={LoginModal.render} animationTiming={animationTiming}/>
+            {render && <RegisterModal render={RegisterModal.render} animationTiming={animationTiming} />}
+        </StyledBackdrop>
+    )
 }
 
 export default Login

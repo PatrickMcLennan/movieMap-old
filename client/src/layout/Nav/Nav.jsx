@@ -1,3 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import {UserProvider} from '../../contexts/UserProvider'
+import { UserContext } from '../../contexts/UserProvider'
+
+const Nav = () => {
+    // const { context } = useContext(UserContext);
+    return (
+        <nav>
+            <button>Click Me</button>
+            {/* {console.log(context)} */}
+        </nav>
+    )
+}
+
+export default Nav;

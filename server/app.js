@@ -3,30 +3,30 @@ const compression = require('compression');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const json = require('body-parser');
 const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 4000;
 
-const getUser = require('./controllers/getUser');
+const postUser = require('./controllers/postUser');
 const postMovieDump = require('./controllers/postMovieDump');
 
 const app = new express();
 
 dotenv.config();
-app.use(compression);
-app.use(cors);
-app.use(json);
+app.use(compression());
+app.use(cors());
+app.use(bodyParser.json({ type: '*/*' }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/movieDump', postMovieDump);
-app.get('/getUser', getUser);
+app.post('/postUser', postUser);
 
 app.listen(PORT, err => {
 	if (err) {
 		console.error(err);
 	} else {
 		mongoose
-			.connect(process.env.MONGO, { useNewUrlParser: true })
+			.connect(process.env.MONGO, { useCreateIndex: true, useNewUrlParser: true })
 			.then(() => console.log(`The Server + Mongo are running on Port ${PORT}`))
 			.catch(err => console.error(err));
 	}

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Model = mongoose.model;
 const uniqueValidator = require('mongoose-unique-validator');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 const Movie = require('./Movie.js');
 
@@ -20,7 +20,7 @@ const UserSchema = new Schema({
 		type: String,
 		required: 'Each user must have a password'
 	},
-	savedMovies: [Movie],
+	// savedMovies: [Movie],
 	colorScheme: String,
 	notifications: [
 		{
